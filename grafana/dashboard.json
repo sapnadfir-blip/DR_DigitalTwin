@@ -1,0 +1,249 @@
+{
+  "dashboard": {
+    "id": null,
+    "uid": "dr-digital-twin",
+    "title": "DR Digital Twin — Real-Time Analytics",
+    "description": "Diabetic Retinopathy Digital Twin: biomarker detection, causal analysis, treatment simulation metrics from real OLIVES data",
+    "tags": ["digital-twin", "diabetic-retinopathy", "OLIVES", "causal-graph"],
+    "timezone": "browser",
+    "schemaVersion": 39,
+    "refresh": "30s",
+    "time": { "from": "now-1h", "to": "now" },
+    "templating": { "list": [] },
+    "annotations": { "list": [] },
+    "panels": [
+      {
+        "id": 1,
+        "title": "",
+        "type": "row",
+        "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 },
+        "panels": [],
+        "collapsed": false
+      },
+      {
+        "id": 2,
+        "title": "Best Model",
+        "type": "stat",
+        "gridPos": { "h": 4, "w": 4, "x": 0, "y": 1 },
+        "datasource": { "type": "marcusolsson-json-datasource", "uid": "dr-metrics" },
+        "targets": [{ "method": "GET", "urlPath": "/overview", "fields": [{ "jsonPath": "$.best_model", "name": "Model" }] }],
+        "options": { "colorMode": "background", "graphMode": "none", "textMode": "value" },
+        "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "blue" }, "thresholds": { "mode": "absolute", "steps": [{ "color": "blue", "value": null }] } } }
+      },
+      {
+        "id": 3,
+        "title": "Macro F1 Score",
+        "type": "stat",
+        "gridPos": { "h": 4, "w": 4, "x": 4, "y": 1 },
+        "datasource": { "type": "marcusolsson-json-datasource", "uid": "dr-metrics" },
+        "targets": [{ "method": "GET", "urlPath": "/overview", "fields": [{ "jsonPath": "$.macro_f1", "name": "F1" }] }],
+        "options": { "colorMode": "background", "graphMode": "none", "textMode": "value" },
+        "fieldConfig": { "defaults": { "unit": "percentunit", "decimals": 3, "color": { "mode": "thresholds" }, "thresholds": { "mode": "absolute", "steps": [{ "color": "red", "value": null }, { "color": "orange", "value": 0.5 }, { "color": "green", "value": 0.7 }] } } }
+      },
+      {
+        "id": 4,
+        "title": "Total Patient Sequences",
+        "type": "stat",
+        "gridPos": { "h": 4, "w": 4, "x": 8, "y": 1 },
+        "datasource": { "type": "marcusolsson-json-datasource", "uid": "dr-metrics" },
+        "targets": [{ "method": "GET", "urlPath": "/overview", "fields": [{ "jsonPath": "$.total_sequences", "name": "Sequences" }] }],
+        "options": { "colorMode": "background", "graphMode": "none", "textMode": "value" },
+        "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "purple" }, "thresholds": { "mode": "absolute", "steps": [{ "color": "purple", "value": null }] } } }
+      },
+      {
+        "id": 5,
+        "title": "Significant Causal Edges",
+        "type": "stat",
+        "gridPos": { "h": 4, "w": 4, "x": 12, "y": 1 },
+        "datasource": { "type": "marcusolsson-json-datasource", "uid": "dr-metrics" },
+        "targets": [{ "method": "GET", "urlPath": "/overview", "fields": [{ "jsonPath": "$.n_causal_edges", "name": "Edges" }] }],
+        "options": { "colorMode": "background", "graphMode": "none", "textMode": "value" },
+        "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "orange" }, "thresholds": { "mode": "absolute", "steps": [{ "color": "orange", "value": null }] } } }
+      },
+      {
+        "id": 6,
+        "title": "Progression MAE",
+        "type": "stat",
+        "gridPos": { "h": 4, "w": 4, "x": 16, "y": 1 },
+        "datasource": { "type": "marcusolsson-json-datasource", "uid": "dr-metrics" },
+        "targets": [{ "method": "GET", "urlPath": "/overview", "fields": [{ "jsonPath": "$.progression_mae", "name": "MAE" }] }],
+        "options": { "colorMode": "background", "graphMode": "none", "textMode": "value" },
+        "fieldConfig": { "defaults": { "decimals": 4, "color": { "mode": "thresholds" }, "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }, { "color": "orange", "value": 0.2 }, { "color": "red", "value": 0.4 }] } } }
+      },
+      {
+        "id": 7,
+        "title": "Test Patients Evaluated",
+        "type": "stat",
+        "gridPos": { "h": 4, "w": 4, "x": 20, "y": 1 },
+        "datasource": { "type": "marcusolsson-json-datasource", "uid": "dr-metrics" },
+        "targets": [{ "method": "GET", "urlPath": "/overview", "fields": [{ "jsonPath": "$.n_test_patients", "name": "Patients" }] }],
+        "options": { "colorMode": "background", "graphMode": "none", "textMode": "value" },
+        "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "green" }, "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] } } }
+      },
+      {
+        "id": 10,
+        "title": "",
+        "type": "row",
+        "gridPos": { "h": 1, "w": 24, "x": 0, "y": 5 },
+        "panels": [],
+        "collapsed": false
+      },
+      {
+        "id": 11,
+        "title": "Biomarker Prevalence (%)",
+        "description": "Percentage of visits where each biomarker is active — from real OLIVES data",
+        "type": "barchart",
+        "gridPos": { "h": 8, "w": 8, "x": 0, "y": 6 },
+        "datasource": { "type": "marcusolsson-json-datasource", "uid": "dr-metrics" },
+        "targets": [{ "method": "GET", "urlPath": "/biomarker-prevalence", "fields": [{ "jsonPath": "$[*].biomarker", "name": "Biomarker" }, { "jsonPath": "$[*].prevalence", "name": "Prevalence (%)", "type": "number" }] }],
+        "options": { "xField": "Biomarker", "orientation": "horizontal", "showValue": "always", "barWidth": 0.6 },
+        "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "unit": "percent" } }
+      },
+      {
+        "id": 12,
+        "title": "Patient Severity Distribution",
+        "description": "Overall severity score per patient (mean biomarker probability at last visit)",
+        "type": "histogram",
+        "gridPos": { "h": 8, "w": 8, "x": 8, "y": 6 },
+        "datasource": { "type": "marcusolsson-json-datasource", "uid": "dr-metrics" },
+        "targets": [{ "method": "GET", "urlPath": "/patient-severity", "fields": [{ "jsonPath": "$[*].severity", "name": "Severity", "type": "number" }] }],
+        "options": { "bucketCount": 15, "fillOpacity": 80 },
+        "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "#e74c3c" } } }
+      },
+      {
+        "id": 13,
+        "title": "Visit Count Distribution",
+        "description": "How many visits per patient-eye in the OLIVES dataset",
+        "type": "barchart",
+        "gridPos": { "h": 8, "w": 8, "x": 16, "y": 6 },
+        "datasource": { "type": "marcusolsson-json-datasource", "uid": "dr-metrics" },
+        "targets": [{ "method": "GET", "urlPath": "/visit-distribution", "fields": [{ "jsonPath": "$[*].visits", "name": "Visits", "type": "number" }, { "jsonPath": "$[*].patients", "name": "Patients", "type": "number" }] }],
+        "options": { "xField": "Visits", "showValue": "always" },
+        "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "#3498db" } } }
+      },
+      {
+        "id": 20,
+        "title": "",
+        "type": "row",
+        "gridPos": { "h": 1, "w": 24, "x": 0, "y": 14 },
+        "panels": [],
+        "collapsed": false
+      },
+      {
+        "id": 21,
+        "title": "Significant Causal Edges (p < 0.05)",
+        "description": "Directed temporal causal links between biomarkers — from real longitudinal data",
+        "type": "table",
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 15 },
+        "datasource": { "type": "marcusolsson-json-datasource", "uid": "dr-metrics" },
+        "targets": [{ "method": "GET", "urlPath": "/causal-edges", "fields": [
+          { "jsonPath": "$[*].source", "name": "Source" },
+          { "jsonPath": "$[*].target", "name": "Target" },
+          { "jsonPath": "$[*].causal_effect", "name": "Causal Effect", "type": "number" },
+          { "jsonPath": "$[*].p_value", "name": "p-value", "type": "number" },
+          { "jsonPath": "$[*].direction", "name": "Direction" }
+        ] }],
+        "fieldConfig": { "defaults": { "custom": { "align": "center" } }, "overrides": [
+          { "matcher": { "id": "byName", "options": "Causal Effect" }, "properties": [{ "id": "decimals", "value": 4 }, { "id": "color", "value": { "mode": "continuous-RdYlGn" } }, { "id": "custom.cellOptions", "value": { "type": "color-background" } }] },
+          { "matcher": { "id": "byName", "options": "p-value" }, "properties": [{ "id": "decimals", "value": 4 }] }
+        ] }
+      },
+      {
+        "id": 22,
+        "title": "Discovered Causal Chains",
+        "description": "Multi-hop causal pathways in the biomarker transition graph",
+        "type": "table",
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 15 },
+        "datasource": { "type": "marcusolsson-json-datasource", "uid": "dr-metrics" },
+        "targets": [{ "method": "GET", "urlPath": "/causal-chains", "fields": [
+          { "jsonPath": "$[*].chain", "name": "Chain" },
+          { "jsonPath": "$[*].total_strength", "name": "Strength", "type": "number" },
+          { "jsonPath": "$[*].length", "name": "Length", "type": "number" }
+        ] }],
+        "fieldConfig": { "defaults": { "custom": { "align": "center" } }, "overrides": [
+          { "matcher": { "id": "byName", "options": "Strength" }, "properties": [{ "id": "decimals", "value": 3 }] }
+        ] }
+      },
+      {
+        "id": 30,
+        "title": "",
+        "type": "row",
+        "gridPos": { "h": 1, "w": 24, "x": 0, "y": 23 },
+        "panels": [],
+        "collapsed": false
+      },
+      {
+        "id": 31,
+        "title": "Treatment Recommendations (Real Patients)",
+        "description": "Which treatment was recommended most for real test patients",
+        "type": "piechart",
+        "gridPos": { "h": 8, "w": 8, "x": 0, "y": 24 },
+        "datasource": { "type": "marcusolsson-json-datasource", "uid": "dr-metrics" },
+        "targets": [{ "method": "GET", "urlPath": "/treatment-recommendations", "fields": [
+          { "jsonPath": "$[*].treatment", "name": "Treatment" },
+          { "jsonPath": "$[*].count", "name": "Patients", "type": "number" }
+        ] }],
+        "options": { "displayLabels": ["name", "value", "percent"], "legend": { "displayMode": "table", "placement": "right" } },
+        "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" } } }
+      },
+      {
+        "id": 32,
+        "title": "Per-Patient Treatment Effectiveness",
+        "description": "Final predicted severity for each treatment across all test patients",
+        "type": "table",
+        "gridPos": { "h": 8, "w": 8, "x": 8, "y": 24 },
+        "datasource": { "type": "marcusolsson-json-datasource", "uid": "dr-metrics" },
+        "targets": [{ "method": "GET", "urlPath": "/treatment-effectiveness", "fields": [
+          { "jsonPath": "$[*].patient_id", "name": "Patient" },
+          { "jsonPath": "$[*].treatment", "name": "Treatment" },
+          { "jsonPath": "$[*].final_severity", "name": "Final Severity", "type": "number" }
+        ] }],
+        "fieldConfig": { "defaults": { "custom": { "align": "center" } }, "overrides": [
+          { "matcher": { "id": "byName", "options": "Final Severity" }, "properties": [{ "id": "decimals", "value": 3 }, { "id": "color", "value": { "mode": "continuous-GrYlRd" } }, { "id": "custom.cellOptions", "value": { "type": "color-background" } }] }
+        ] }
+      },
+      {
+        "id": 33,
+        "title": "Patient Details",
+        "description": "All patients with severity, active biomarkers, and visit count",
+        "type": "table",
+        "gridPos": { "h": 8, "w": 8, "x": 16, "y": 24 },
+        "datasource": { "type": "marcusolsson-json-datasource", "uid": "dr-metrics" },
+        "targets": [{ "method": "GET", "urlPath": "/patient-severity", "fields": [
+          { "jsonPath": "$[*].patient_id", "name": "Patient" },
+          { "jsonPath": "$[*].severity", "name": "Severity", "type": "number" },
+          { "jsonPath": "$[*].active_biomarkers", "name": "Active BMs", "type": "number" },
+          { "jsonPath": "$[*].n_visits", "name": "Visits", "type": "number" }
+        ] }],
+        "fieldConfig": { "defaults": { "custom": { "align": "center" } }, "overrides": [
+          { "matcher": { "id": "byName", "options": "Severity" }, "properties": [{ "id": "decimals", "value": 3 }, { "id": "color", "value": { "mode": "continuous-GrYlRd" } }, { "id": "custom.cellOptions", "value": { "type": "color-background" } }] }
+        ] }
+      },
+      {
+        "id": 40,
+        "title": "",
+        "type": "row",
+        "gridPos": { "h": 1, "w": 24, "x": 0, "y": 32 },
+        "panels": [],
+        "collapsed": false
+      },
+      {
+        "id": 41,
+        "title": "Causal Effect Matrix",
+        "description": "Full directed causal effect matrix — how each biomarker at visit t affects each at visit t+1",
+        "type": "table",
+        "gridPos": { "h": 8, "w": 24, "x": 0, "y": 33 },
+        "datasource": { "type": "marcusolsson-json-datasource", "uid": "dr-metrics" },
+        "targets": [{ "method": "GET", "urlPath": "/causal-matrix", "fields": [
+          { "jsonPath": "$[*].source", "name": "Source (t)" },
+          { "jsonPath": "$[*].target", "name": "Target (t+1)" },
+          { "jsonPath": "$[*].effect", "name": "Causal Effect", "type": "number" }
+        ] }],
+        "fieldConfig": { "defaults": { "custom": { "align": "center" } }, "overrides": [
+          { "matcher": { "id": "byName", "options": "Causal Effect" }, "properties": [{ "id": "decimals", "value": 4 }, { "id": "color", "value": { "mode": "continuous-RdYlGn" } }, { "id": "custom.cellOptions", "value": { "type": "color-background" } }] }
+        ] }
+      }
+    ]
+  },
+  "overwrite": true
+}
