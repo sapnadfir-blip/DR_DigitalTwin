@@ -34,27 +34,19 @@ VD     -> IRF -> IRHRF    (strength: 0.231)
 
 ## Architecture
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    DIGITAL TWIN PIPELINE                     │
-├──────────────┬──────────────────┬───────────────────────────┤
-│   LAYER 1    │     LAYER 2      │         LAYER 3           │
-│  Biomarker   │   Progression    │    Treatment Simulation   │
-│  Detection   │    Modeling      │    & Virtual Drug Testing  │
-├──────────────┼──────────────────┼───────────────────────────┤
-│ OCT Image    │ Visit History    │ Treatment Scenarios        │
-│     |        │     |            │     |                      │
-│ ResNet-18    │ Graph-LSTM       │ Counterfactual Rollout     │
-│     |        │ (NPMI-weighted)  │     |                      │
-│ GCN/GAT      │     |            │ Monte Carlo Simulation     │
-│     |        │     |            │     |                      │
-│ 6 Biomarker  │ Next-Visit       │ Treatment Recommendation   │
-│ Predictions  │ Prediction       │ + Confidence Intervals     │
-└──────────────┴──────────────────┴───────────────────────────┘
-        |               |                    |
-        └───── NPMI Co-occurrence Graph ──────┘
-              (shared structural prior)
-```
+<p align="center">
+  <img src="docs/architecture.svg" alt="DR Digital Twin Architecture" width="100%"/>
+</p>
+
+**Three-layer pipeline:**
+
+| Layer | Component | Input | Output |
+|-------|-----------|-------|--------|
+| **Layer 1** | ResNet-18 → NPMI Graph → GCN | OCT scan image | 6 biomarker probabilities |
+| **Layer 2** | Graph-LSTM (auto-regressive) | Biomarker state + treatment | 6 future visit trajectories + severity score |
+| **Layer 3** | Treatment Simulator + Monte Carlo | 4 treatment scenarios | Best treatment recommendation + 95% CI |
+
+**Shared structural prior:** The NPMI co-occurrence matrix connects Layers 1 and 2, ensuring biomarker predictions respect known co-occurrence patterns.
 
 ---
 
