@@ -109,7 +109,8 @@ Creates 8 publication-quality plots in `outputs/visualizations/`.
 
 ### 6. Launch Grafana monitoring dashboard (optional)
 
-> **Note**: The Grafana Infinity plugin (required for JSON API panels) requires Grafana ≥ 11.6.11. If you are running an older Grafana version, use the **Streamlit dashboard** (step 4) instead — it provides the same data with full interactivity.
+> [!CAUTION]
+> **Grafana dashboard is currently being fixed.** The Infinity plugin (v4.1.3) requires Grafana ≥ 11.6.11 and is incompatible with Grafana 11.4.0. Panels may show "No data" or incorrect time-series values. Use the **Streamlit dashboard** (step 4) for full pipeline monitoring in the meantime.
 
 ```bash
 python metrics_server.py &            # Start metrics API on port 9100
