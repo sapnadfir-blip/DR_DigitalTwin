@@ -1,0 +1,15 @@
+{
+  "layer1": {
+    "best_model": "gcn",
+    "best_seed": 2024,
+    "macro_f1": 0.8057
+  },
+  "layer3": {
+    "n_test_patients": 10
+  },
+  "data": {
+    "train_sequences": 68,
+    "val_sequences": 15,
+    "test_sequences": 13
+  }
+}

@@ -1,0 +1,145 @@
+[
+  {
+    "patient_id": "60",
+    "active_biomarkers": [
+      "FAVF",
+      "VD"
+    ],
+    "recommendation": "observation",
+    "final_severity": {
+      "anti_vegf": 0.46668532490730286,
+      "steroid": 0.4666711390018463,
+      "laser": 0.4666154682636261,
+      "observation": 0.46660861372947693
+    }
+  },
+  {
+    "patient_id": "72",
+    "active_biomarkers": [
+      "FAVF"
+    ],
+    "recommendation": "observation",
+    "final_severity": {
+      "anti_vegf": 0.466431587934494,
+      "steroid": 0.4664106070995331,
+      "laser": 0.46636369824409485,
+      "observation": 0.46635785698890686
+    }
+  },
+  {
+    "patient_id": "73",
+    "active_biomarkers": [
+      "FAVF",
+      "VD"
+    ],
+    "recommendation": "observation",
+    "final_severity": {
+      "anti_vegf": 0.4662727415561676,
+      "steroid": 0.4662511646747589,
+      "laser": 0.4662114679813385,
+      "observation": 0.4662093222141266
+    }
+  },
+  {
+    "patient_id": "75",
+    "active_biomarkers": [
+      "IRHRF",
+      "FAVF",
+      "VD"
+    ],
+    "recommendation": "observation",
+    "final_severity": {
+      "anti_vegf": 0.46697548031806946,
+      "steroid": 0.46696731448173523,
+      "laser": 0.46690335869789124,
+      "observation": 0.46688833832740784
+    }
+  },
+  {
+    "patient_id": "204",
+    "active_biomarkers": [
+      "IRHRF",
+      "IRF",
+      "DRT/ME"
+    ],
+    "recommendation": "observation",
+    "final_severity": {
+      "anti_vegf": 0.4703042507171631,
+      "steroid": 0.47029635310173035,
+      "laser": 0.47030016779899597,
+      "observation": 0.4702925384044647
+    }
+  },
+  {
+    "patient_id": "213",
+    "active_biomarkers": [
+      "PAVF",
+      "VD"
+    ],
+    "recommendation": "observation",
+    "final_severity": {
+      "anti_vegf": 0.47023653984069824,
+      "steroid": 0.4702293872833252,
+      "laser": 0.470232218503952,
+      "observation": 0.47022366523742676
+    }
+  },
+  {
+    "patient_id": "222",
+    "active_biomarkers": [
+      "PAVF",
+      "VD"
+    ],
+    "recommendation": "observation",
+    "final_severity": {
+      "anti_vegf": 0.4672029912471771,
+      "steroid": 0.46720167994499207,
+      "laser": 0.4671342372894287,
+      "observation": 0.46711453795433044
+    }
+  },
+  {
+    "patient_id": "230",
+    "active_biomarkers": [
+      "FAVF",
+      "VD"
+    ],
+    "recommendation": "observation",
+    "final_severity": {
+      "anti_vegf": 0.46915939450263977,
+      "steroid": 0.4691843092441559,
+      "laser": 0.4691431522369385,
+      "observation": 0.46913695335388184
+    }
+  },
+  {
+    "patient_id": "237",
+    "active_biomarkers": [
+      "PAVF",
+      "VD"
+    ],
+    "recommendation": "steroid",
+    "final_severity": {
+      "anti_vegf": 0.47054585814476013,
+      "steroid": 0.47053882479667664,
+      "laser": 0.47054263949394226,
+      "observation": 0.4705406129360199
+    }
+  },
+  {
+    "patient_id": "251",
+    "active_biomarkers": [
+      "IRHRF",
+      "FAVF",
+      "DRT/ME",
+      "VD"
+    ],
+    "recommendation": "observation",
+    "final_severity": {
+      "anti_vegf": 0.47043272852897644,
+      "steroid": 0.47042420506477356,
+      "laser": 0.47042855620384216,
+      "observation": 0.4704239070415497
+    }
+  }
+]
