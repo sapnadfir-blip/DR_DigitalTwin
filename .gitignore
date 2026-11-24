@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Data & outputs (too large for git)
+data/
+outputs/
+*.npy
+*.pkl
+*.pt
+
+# Logs
+*.log
+*.txt
+!requirements.txt
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# LaTeX build artifacts
+*.aux
+*.out
+*.toc
+
+# Backups
+*.bak
+
+# Grafana
+grafana_dashboard.json
+grafana_log.txt
+
+# Claude
+.claude/
